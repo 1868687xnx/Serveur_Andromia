@@ -1,0 +1,26 @@
+{
+  "name": "serveur_andromia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "node --env-file=.development.env --watch server.js",
+    "generate:expenses": "node --env-file=.development.env generate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1868687xnx/Serveur_Andromia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1868687xnx/Serveur_Andromia/issues"
+  },
+  "homepage": "https://github.com/1868687xnx/Serveur_Andromia#readme",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "express": "^5.1.0"
+  }
+}
