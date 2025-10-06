@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/1868687xnx/Serveur_Andromia#readme",
   "dependencies": {
+    "axios": "^1.12.2",
     "chalk": "^5.6.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mongoose": "^8.18.3"
+    "http-errors": "^2.0.0",
+    "mongoose": "^8.19.1"
   }
 }
