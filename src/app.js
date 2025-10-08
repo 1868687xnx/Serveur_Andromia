@@ -14,7 +14,7 @@ app.use(express.json());
 app.get('/status', (req, res) => { res.status(200).end(); });
 app.head('/status', (req, res) => { res.status(200).end(); });
 
-
+app.use('/explorateurs', (await import('./routes/explorateurs.routes.js')).default);
 app.use(errors);
 
 export default app;

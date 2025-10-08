@@ -80,7 +80,7 @@ class ExplorateurRepository {
     }
 
     transform(explorateur) {
-        explorateur.href = `${process.env.BASE_URL}/accounts/${account.uuid}`;
+        explorateur.href = `${process.env.BASE_URL}/explorateurs/${explorateur.uuid}`;
 
         delete explorateur._id;
         delete explorateur.__v;
