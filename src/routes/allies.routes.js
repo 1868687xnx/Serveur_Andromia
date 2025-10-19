@@ -1,13 +1,15 @@
 import express from 'express';
+import HttpErrors from 'http-errors';
 import allyRepository from '../repositories/ally.repository.js';
 
 
-import { guardAuthorizationJWT } from '../middlewares/authorization.jwt.js';
 import explorateurRepository from '../repositories/explorateur.repository.js';
 
 const router = express.Router();
 
 router.post('/', addAlly);
+// route by uuid must be before the '/mine' literal to avoid matching 'mine' as a uuid
+router.get('/:uuid', retrieveByUUID);
 router.get('/', retrieveAll);
 
 async function addAlly(req, res, next) {
@@ -26,10 +28,33 @@ async function addAlly(req, res, next) {
         return next(err);
     }
 }
+// Route pour récupérer tous les Allies, mais pour touts les explorateurs, pas seulement un spécifique
+// async function retrieveAll(req, res, next) {
+//     try {
+//         let allies = await allyRepository.retrieveAll();
+//         allies = allies.map(a => {
+//             a = a.toObject({ getters: false, virtuals: false });
+//             a = allyRepository.transform(a, req.options);
+//             return a;
+//         });
 
-async function retrieveAll(req, res, next) {
+//         res.status(200).json(allies);
+//     } catch (err) {
+//         console.log(err);
+//         return next(err);
+//     }
+// }
+
+// Route pour récupérer les Allies d'un explorateur spécifique par son UUID
+async function retrieveByUUID(req, res, next) {
     try {
-        let allies = await allyRepository.retrieveAll();
+        const explorateur = await explorateurRepository.retrieveByUUID(req.params.uuid);
+        if (!explorateur) {
+            return next(HttpErrors.NotFound());
+        }
+
+        let allies = await allyRepository.retrieveForOneUser(explorateur._id);
+
         allies = allies.map(a => {
             a = a.toObject({ getters: false, virtuals: false });
             a = allyRepository.transform(a, req.options);
@@ -38,9 +63,10 @@ async function retrieveAll(req, res, next) {
 
         res.status(200).json(allies);
     } catch (err) {
-        console.log(err);
         return next(err);
     }
 }
 
 export default router;
+
+
