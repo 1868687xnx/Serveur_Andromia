@@ -9,6 +9,7 @@ import { Explorateur } from '../models/explorateur.model.js';
 class ExplorateurRepository {
     async login(credential, password) {
         const explorateur = await this.retrieveByCredentials(credential);
+        console.log(explorateur);
         if (!explorateur) {
             throw HttpErrors.Unauthorized();
         }

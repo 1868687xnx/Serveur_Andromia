@@ -13,14 +13,13 @@ router.get('/', login);
 async function login(req, res, next) {
     try {
         const { credential, password } = req.body;
-
+        console.log(credential);
         let account = await explorateurRepository.login(credential, password);
         if (!account) {
             throw new HttpErrors.Unauthorized('Identifiants invalides');
         }
 
         const tokens = explorateurRepository.generateJWT(account._id);
-
 
         account = account.toObject({ getters: false, virtuals: false });
         account = explorateurRepository.transform(account);

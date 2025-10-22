@@ -7,14 +7,14 @@ import explorateurRepository from '../repositories/explorateur.repository.js';
 
 const router = express.Router();
 
-router.post('/', addAlly);
+router.post('/Ally', addAlly);
 // route by uuid must be before the '/mine' literal to avoid matching 'mine' as a uuid
 router.get('/:uuid', retrieveByUUID);
 router.get('/', retrieveAll);
 
 async function addAlly(req, res, next) {
     try {
-        let explorateur = await explorateurRepository.retrieveByEmail(req.auth.email);
+        let explorateur = await explorateurRepository.retrieveByCredentials(req.auth.email);
         let newAlly = await explorateurRepository.addAlly(req.body, explorateur._id);
 
         if (req.query._body === 'false') {

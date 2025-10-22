@@ -13,8 +13,7 @@ import explorateurValidators from '../validators/explorateur.validator.js';
 const router = express.Router();
 
 router.post('/', explorateurValidators.postValidator(), validator, post);
-router.get('/', retrieveOne);
-router.get('/:uuid/allies', retrieveAlliesForExplorateur);
+router.get('/:uuid', retrieveOne);
 
 async function post(req, res, next) {
     try {
@@ -34,7 +33,7 @@ async function post(req, res, next) {
 
 async function retrieveOne(req, res, next) {
     try {
-        let account = await explorateurRepository.login(req.params.uuid);
+        let account = await explorateurRepository.retrieveByUUID(req.params.uuid);
         if (!account) {
             return next(HttpErrors.NotFound());
         } else {
@@ -42,26 +41,6 @@ async function retrieveOne(req, res, next) {
             account = explorateurRepository.transform(account);
             res.status(200).json(account);
         }
-    } catch (err) {
-        return next(err);
-    }
-}
-
-async function retrieveAlliesForExplorateur(req, res, next) {
-    try {
-        const tokenBase64 = req.auth.base64;
-        if (req.params.base64 !== tokenBase64) {
-            return next(HttpErrors.Forbidden());
-        }
-        const account = await explorateurRepository.retrieveByBase64(tokenBase64);
-        let allies = await allyRepository.retrieveForOneUser(account._id);
-
-        allies = allies.map(a => {
-            a = a.toObject();
-            return allyRepository.transform(e);
-        });
-
-        res.status(200).json(allies);
     } catch (err) {
         return next(err);
     }

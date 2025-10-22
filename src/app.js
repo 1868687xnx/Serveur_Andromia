@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-
+import jobs from './core/jobs.js';
 import database from './core/database.js';
 import errors from './middlewares/errors.js';
 
@@ -15,6 +15,7 @@ app.get('/status', (req, res) => { res.status(200).end(); });
 app.head('/status', (req, res) => { res.status(200).end(); });
 
 app.use('/explorateurs', (await import('./routes/explorateurs.routes.js')).default);
+app.use('/sessions', (await import('./routes/sessions.routes.js')).default);
 app.use(errors);
 
 export default app;
