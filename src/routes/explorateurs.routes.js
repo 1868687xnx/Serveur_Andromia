@@ -13,7 +13,7 @@ import explorateurValidators from '../validators/explorateur.validator.js';
 const router = express.Router();
 
 router.post('/', explorateurValidators.postValidator(), validator, post);
-router.get('/:uuid', retrieveOne);
+router.get('/', retrieveOne);
 router.get('/:uuid/allies', retrieveAlliesForExplorateur);
 
 async function post(req, res, next) {
@@ -34,7 +34,7 @@ async function post(req, res, next) {
 
 async function retrieveOne(req, res, next) {
     try {
-        let account = await explorateurRepository.retrieveByUUID(req.params.uuid);
+        let account = await explorateurRepository.login(req.params.uuid);
         if (!account) {
             return next(HttpErrors.NotFound());
         } else {
