@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import crypto from 'crypto';
 import { ElementSchema } from './element.model.js';
 
+import TABLE_ELEMENT from '../core/constants.js';
+
 const explorateurSchema = mongoose.Schema(
     {
         username: { type: String, required: true, unique: true },
@@ -15,7 +17,7 @@ const explorateurSchema = mongoose.Schema(
         inventory: {
             vault: {
                 inox: { type: Number, default: 0 },
-                elements: { type: [ElementSchema], default: [] }
+                elements: { type: [ElementSchema], default: TABLE_ELEMENT.slice()}
             }
         }
     },
