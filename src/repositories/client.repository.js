@@ -1,15 +1,13 @@
-import argon from 'argon2';
-
-import { Client } from '../models/client.model.js';
+import Exploration from '../models/exploration.model.js';
 
 
-class ClientRepository {
+class ExplorationRepository {
 
-    async validateClient(clientId, clientSecret) {
-        const client = await Client.findOne({ clientId: clientId });       
-        return await argon.verify(client.clientSecret, clientSecret);    
+    async addForOneUser(exploration, explorateurId) {
+        exploration.explorateur = explorateurId;
+        return await Exploration.create(exploration);
     }
 
 }
 
-export default new ClientRepository();
+export default new ExplorationRepository();

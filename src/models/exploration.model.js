@@ -8,7 +8,7 @@ const explorationSchema = mongoose.Schema(
             required: true,
             default: Date.now
         },
-        location: { type: String, required: true},
+        destination: { type: String, required: true},
         affinity: { type: String, required: true },
         vault: { 
             type: mongoose.Schema.Types.Array, 

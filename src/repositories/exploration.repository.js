@@ -2,6 +2,8 @@ import { Ally } from '../models/ally.model.js';
 
 
 
+
+
 class ExplorationRepository {
 
     transform(expense) {
