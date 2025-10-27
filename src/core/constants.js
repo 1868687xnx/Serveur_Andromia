@@ -21,3 +21,5 @@ export const TABLE_ELEMENT = [
     {symbol: "Fr", quantity: 0},
     {symbol: "Ve", quantity: 0}
 ]
+
+export default TABLE_ELEMENT;
