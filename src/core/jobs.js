@@ -8,18 +8,19 @@ const jobAddInox = schedule.scheduleJob('*/1 * * * *', async function(){
         console.log('2 inox added to all explorateurs');
 });
 
-
+// pour chaque heures 0 */1 * * *
 // Ajout entre 1 et 3 de quantités de chaques éléments à chaque explorateurs toutes les heures
-const jobAddElements = schedule.scheduleJob('0 */1 * * *', async function() {
+const jobAddElements = schedule.scheduleJob('*/1 * * * *', async function() {
     // Récupérer tous les explorateurs
     const explorateurs = await Explorateur.find({});
-    
+    console.log(`Found ${explorateurs}`);
     // Pour chaque explorateur, incrémenter chaque élément d'une quantité aléatoire entre 1 et 3
     for (const explorateur of explorateurs) {
         const updateObj = {};
         TABLE_ELEMENT.forEach((element, index) => {
             const randomQuantity = Math.floor(Math.random() * 3) + 1;
             updateObj[`inventory.vault.elements.${index}.quantity`] = randomQuantity;
+            console.log(`Adding ${randomQuantity} of ${element.symbol} to explorateur ${explorateur.uuid}`);
         });
         
         await Explorateur.updateOne(
