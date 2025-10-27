@@ -1,0 +1,19 @@
+meta {
+  name: [200] - Retrouver Utilisateur
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:5545/explorateurs/:uuid
+  body: json
+  auth: inherit
+}
+
+params:path {
+  uuid: 7a39f31a-7f11-4620-b5a8-1a319ca00797
+}
+
+settings {
+  encodeUrl: true
+}

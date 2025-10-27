@@ -1,0 +1,22 @@
+meta {
+  name: [200] - Connexion
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:5545/sessions
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "credential":"toteod@ecstj.qc.ca",
+      "password":"1234wr1234"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

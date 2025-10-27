@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "testAndromiaServer",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
