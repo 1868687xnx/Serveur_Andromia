@@ -8,12 +8,13 @@ import { Exploration } from '../models/exploration.model.js';
 
 class ExplorationRepository {
 
-    async addForOneUser(body, explorateir_id) {
-        const explorateur = await Explorateur.findById(explorateir_id);
+    async addForOneUser(body, explorateur_id) {
+        const explorateur = await Explorateur.findById(explorateur_id);
         if (!explorateur) {
             throw new Error('Explorateur not found');
         }
-        const exploration = Exploration.create(body);
+        body.explorateur = explorateur_id;
+        const exploration = await Exploration.create(body);
         this.transform(exploration);
         return exploration;
     }

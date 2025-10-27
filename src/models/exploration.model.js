@@ -3,6 +3,10 @@ import crypto from 'crypto';
 
 const explorationSchema = mongoose.Schema(
     {
+        explorateur: { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Explorateur'
+        },
         explorationDate: {  
             type: Date,
             required: true,
@@ -27,7 +31,7 @@ const explorationSchema = mongoose.Schema(
     }
 );
 
-const Exploration = mongoose.model('Exploration', explorationSchema);
+const Exploration = mongoose.model('Explorations', explorationSchema);
 
 export { Exploration };
 
