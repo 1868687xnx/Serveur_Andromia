@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+import { ElementSchema } from './element.model.js';
+import TABLE_ELEMENT from '../core/constants.js';
 
 const explorationSchema = mongoose.Schema(
     {
@@ -14,9 +16,9 @@ const explorationSchema = mongoose.Schema(
         },
         destination: { type: String, required: true},
         affinity: { type: String, required: true },
-        vault: { 
-            type: mongoose.Schema.Types.Array, 
-            required: false
+        vault: {
+            inox: { type: Number, default: 0 },
+            elements: { type: [ElementSchema], default: TABLE_ELEMENT.slice()}
         },
         ally: { 
             type: mongoose.Schema.Types.ObjectId,
