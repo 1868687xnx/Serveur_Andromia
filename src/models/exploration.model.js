@@ -4,7 +4,7 @@ import crypto from 'crypto';
 const explorationSchema = mongoose.Schema(
     {
         explorationDate: {  
-            type: date,
+            type: Date,
             required: true,
             default: Date.now
         },

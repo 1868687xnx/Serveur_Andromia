@@ -85,7 +85,6 @@ class ExplorateurRepository {
 
         delete explorateur._id;
         delete explorateur.__v;
-        delete explorateur.uuid;
         delete explorateur.password;
         delete explorateur.passwordHash;
 
