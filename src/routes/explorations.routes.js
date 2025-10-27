@@ -4,12 +4,14 @@ import allyRepository from '../repositories/ally.repository.js';
 import explorationRepository from '../repositories/exploration.repository.js';
 
 import explorateurRepository from '../repositories/explorateur.repository.js';
+import axios from 'axios';
+import { EXPLORATION_URL } from '../core/constants.js';
 
 const router = express.Router();
 
 router.post('/Ally', addAlly);
 router.get('/', retrieveAll);
-router.get('/:uuid', addExploration);
+router.post('/:uuid/explorations/:key', addExploration);
 
 async function addAlly(req, res, next) {
     try {
@@ -34,8 +36,9 @@ async function addExploration(req, res, next) {
             return next(HttpErrors.NotFound());
         }
 
-        const newExploration = await explorationRepository.addForOneUser(req.body, explorateur._id);
+        const newExploration = await axios.get(EXPLORATION_URL + req.params.key);
 
+        await explorationRepository.addForOneUser(newExploration.data, explorateur._id);
         if (req.query._body === 'false') {
             return res.status(204).end();
         }
