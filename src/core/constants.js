@@ -22,4 +22,6 @@ export const TABLE_ELEMENT = [
     {symbol: "Ve", quantity: 0}
 ]
 
+export const EXPLORATION_URL = "api.andromia.science/portals/";
+
 export default TABLE_ELEMENT;
