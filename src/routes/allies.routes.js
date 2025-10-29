@@ -51,7 +51,7 @@ async function retrieveAlliesByUUID(req, res, next) {
     try {
         const explorateur = await explorateurRepository.retrieveByUUID(req.params.uuid);
         if (!explorateur) {
-            return next(HttpErrors.NotFound());
+            return next(HttpErrors.NotFound("Aucun explorateur trouvé avec cet UUID"));
         }
 
         let allies = await allyRepository.retrieveForOneUser(explorateur._id);
@@ -74,12 +74,12 @@ async function retrieveOneAlly(req, res, next) {
     try {
         const explorateur = await explorateurRepository.retrieveByUUID(req.params.uuid);
         if (!explorateur) {
-            return next(HttpErrors.NotFound());
+            return next(HttpErrors.NotFound("Aucun explorateur trouvé avec cet UUID"));
         }
 
         let ally = await allyRepository.retrieveByUUID(req.params.allyUUID);
         if (!ally) {
-            return next(HttpErrors.NotFound());
+            return next(HttpErrors.NotFound("Aucun ally trouvé avec cet UUID"));
         }
 
         res.status(200).json(ally);
