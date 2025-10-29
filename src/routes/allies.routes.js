@@ -9,7 +9,8 @@ const router = express.Router();
 
 router.post('/Ally', addAlly);
 // route by uuid must be before the '/mine' literal to avoid matching 'mine' as a uuid
-router.get('/:uuid', retrieveByUUID);
+router.get('/:uuid', retrieveAlliesByUUID);
+router.get('/:uuid/:allyUUID', retrieveOneAlly);
 router.get('/', retrieveAll);
 
 async function addAlly(req, res, next) {
@@ -46,7 +47,7 @@ async function addAlly(req, res, next) {
 // }
 
 // Route pour récupérer les Allies d'un explorateur spécifique par son UUID
-async function retrieveByUUID(req, res, next) {
+async function retrieveAlliesByUUID(req, res, next) {
     try {
         const explorateur = await explorateurRepository.retrieveByUUID(req.params.uuid);
         if (!explorateur) {
@@ -62,6 +63,26 @@ async function retrieveByUUID(req, res, next) {
         });
 
         res.status(200).json(allies);
+    } catch (err) {
+        return next(err);
+    }
+}
+
+
+// Route pour récupérer un ally spécifique d'un explorateur par son UUID
+async function retrieveOneAlly(req, res, next) {
+    try {
+        const explorateur = await explorateurRepository.retrieveByUUID(req.params.uuid);
+        if (!explorateur) {
+            return next(HttpErrors.NotFound());
+        }
+
+        let ally = await allyRepository.retrieveByUUID(req.params.allyUUID);
+        if (!ally) {
+            return next(HttpErrors.NotFound());
+        }
+
+        res.status(200).json(ally);
     } catch (err) {
         return next(err);
     }
