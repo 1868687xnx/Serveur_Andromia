@@ -1,4 +1,6 @@
+import { all } from 'axios';
 import { Ally } from '../models/ally.model.js';
+import { de } from '@faker-js/faker';
 
 
 
@@ -11,18 +13,11 @@ class AllyRepository {
         return Ally.find({idExplorateur: idExplorateur});
     }
 
-    transform(expense) {
-        expense.href = `${process.env.BASE_URL}/expenses/${expense.base64}`;
-
-        expense.account = {
-            href: `${process.env.BASE_URL}/accounts/${expense.account.base64}`
-        };
-
-        delete expense.base64;
-        delete expense._id;
-        delete expense.__v;
-
-        return expense;
+    transform(ally) {
+        delete ally.books;
+        delete ally.expireAt;
+        delete ally.crypto;
+        return ally;
     }
 }
 
