@@ -32,6 +32,12 @@ const jobAddElements = schedule.scheduleJob('*/1 * * * *', async function() {
     console.log('Random elements added to all explorateurs');
 });
 
-export { jobAddInox, jobAddElements };
+// à chaque jours à minuit 0 0 * * *
+// Job pour ajouter un lootbox à chaque explorateur à tout les jours à minuit
+const jobAddLootbox = schedule.scheduleJob('*/1 * * * *', async function() {
+    await Explorateur.updateMany({}, { $inc: { nbLootboxes: 1 } });
+    console.log('1 lootbox added to all explorateurs');
+});
 
-export default jobAddInox;
+export default { jobAddInox, jobAddElements, jobAddLootbox };
+
