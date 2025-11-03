@@ -8,9 +8,10 @@ import explorateurRepository from "../repositories/explorateur.repository.js"
 
 const router = express.Router();
 
-router.get('/', login);
+router.post('/', login);
 
 async function login(req, res, next) {
+    console.log(req.body)
     try {
         const { credential, password } = req.body;
         console.log(credential);

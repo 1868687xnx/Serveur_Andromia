@@ -12,11 +12,18 @@ import explorateurValidators from '../validators/explorateur.validator.js';
 
 const router = express.Router();
 
-router.post('/', explorateurValidators.postValidator(), validator, post);
+router.post('/', allo, explorateurValidators.postValidator(), validator, post);
 router.get('/:uuid', retrieveOne);
 
+async function allo(req, res, next) {
+    console.log(req.body)
+    next()
+}
+
 async function post(req, res, next) {
+    console.log(req.body)
     try {
+        
         let account = await explorateurRepository.create(req.body);
         //TODO:JWT TOKENS
         const tokens = explorateurRepository.generateJWT(account.uuid);
