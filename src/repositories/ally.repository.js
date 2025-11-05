@@ -21,6 +21,15 @@ class AllyRepository {
         delete ally.crypto;
         return ally;
     }
+
+    async createForOneUser(allyUUID, explorateur_id) {
+        newally = Ally.findOne({uuid: allyUUID});
+        if (!newally) {
+            throw new Error("Ally not found");
+        }
+        newally = this.transform(newally, explorateur_id);
+        return Ally.create(newally);
+    }
 }
 
 export default new AllyRepository();
