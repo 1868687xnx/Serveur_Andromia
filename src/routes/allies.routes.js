@@ -4,19 +4,20 @@ import allyRepository from '../repositories/ally.repository.js';
 
 
 import explorateurRepository from '../repositories/explorateur.repository.js';
+import { guardAuthorizationJWT } from '../middlewares/authorization.jwt.js';
 
 const router = express.Router();
 
-router.patch('/adoption/:uuid/:uuidAlly', addAlly);
 
 router.get('/:uuid', retrieveAlliesByUUID);
 router.get('/:uuid/:uuidAlly', retrieveOneAlly);
-router.get('/', retrieveAll);
+router.patch('/:uuid', guardAuthorizationJWT, addAlly);
 
 async function addAlly(req, res, next) {
     try {
-        let explorateur = await explorateurRepository.retrieveByCredentials(req.auth.email);
-        let newAlly = await allyRepository.createForOneUser(req.params.uuidAlly, explorateur._id);
+        let explorateur = await explorateurRepository.retrieveByUUID(req.auth.uuid);
+        console.log("Explorateur dans allies.routes.js :", req.auth.uuid);
+        let newAlly = await allyRepository.createForOneUser(req.params.uuid, explorateur._id);
 
         if (req.query._body === 'false') {
             return res.status(204).end();
