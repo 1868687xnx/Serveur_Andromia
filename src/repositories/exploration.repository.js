@@ -45,10 +45,10 @@ class ExplorationRepository {
     }
   }
 
-  async createAlly(ally, explorateur_id) {
+  async createAlly(ally) {
     try {
       if (ally) {
-        ally = allyRepository.transform(ally, explorateur_id);
+        ally = allyRepository.transform(ally);
         return Ally.create(ally);
       }
     } catch (err) {
