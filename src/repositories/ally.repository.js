@@ -13,7 +13,9 @@ class AllyRepository {
         return Ally.find({idExplorateur: idExplorateur});
     }
 
-    transform(ally) {
+    transform(ally, explorateur_id) {
+        ally.explorateur = explorateur_id;
+        ally.href = `${process.env.BASE_URL}/allies/${ally.uuid}`;
         delete ally.books;
         delete ally.expireAt;
         delete ally.crypto;
