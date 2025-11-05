@@ -13,7 +13,6 @@ router.get('/', login);
 async function login(req, res, next) {
     try {
         const { credential, password } = req.body;
-        console.log(credential);
         let account = await explorateurRepository.login(credential, password);
         if (!account) {
             throw new HttpErrors.Unauthorized('Identifiants invalides');

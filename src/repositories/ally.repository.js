@@ -20,8 +20,14 @@ class AllyRepository {
         delete ally.crypto;
         return ally;
     }
-    addExplorer(explorateur_id, ally_id) {
-        return Ally.findByIdAndUpdate(ally_id, { explorateur: explorateur_id });
+
+    async createForOneUser(allyUUID, explorateur_id) {
+        newally = Ally.findOne({uuid: allyUUID});
+        if (!newally) {
+            throw new Error("Ally not found");
+        }
+        newally = this.transform(newally, explorateur_id);
+        return Ally.create(newally);
     }
 }
 
