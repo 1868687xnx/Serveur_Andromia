@@ -55,8 +55,9 @@ class ExplorationRepository {
     }
   }
 
-  async retrieveByExplorateurUUID(explorateurId){
-    return explorations = await Exploration.find({explorateur: explorateurId});
+  async retrieveByExplorateurUUID(explorateurUUId){
+    const explorateur = await Explorateur.findOne({uuid: explorateurUUId});
+    return Exploration.find({explorateur: explorateur._id});
   }
 }
 

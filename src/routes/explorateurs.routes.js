@@ -3,6 +3,7 @@ import HttpErrors from 'http-errors';
 import validator from './../middlewares/validator.js';
 import explorateurRepository from "../repositories/explorateur.repository.js"
 import explorateurValidators from '../validators/explorateur.validator.js';
+import { guardAuthorizationJWT } from '../middlewares/authorization.jwt.js';
 
 const router = express.Router();
 

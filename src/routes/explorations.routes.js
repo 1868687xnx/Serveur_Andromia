@@ -44,7 +44,7 @@ async function retrieveAllForUser(req, res, next) {
     if (!explorateur) {
       return next(HttpErrors.NotFound());
     } else {
-      const explorations =
+      let explorations =
         await explorationRepository.retrieveByExplorateurUUID(req.params.uuid);
       explorations = explorations.map(e => {
         e = e.toObject({getters: false, virtuals: false});
