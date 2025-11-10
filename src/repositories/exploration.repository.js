@@ -1,9 +1,8 @@
-import { all } from "axios";
 import { Ally } from "../models/ally.model.js";
 import { Explorateur } from "../models/explorateur.model.js";
 import { Exploration } from "../models/exploration.model.js";
 import allyRepository from "./ally.repository.js";
-import { body } from "express-validator";
+
 
 class ExplorationRepository {
   async addForOneUser(body, explorateur_id) {

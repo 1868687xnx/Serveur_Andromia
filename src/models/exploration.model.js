@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import crypto from 'crypto';
-import { ElementSchema } from './element.model.js';
-import TABLE_ELEMENT from '../core/constants.js';
 
 const explorationSchema = mongoose.Schema(
     {

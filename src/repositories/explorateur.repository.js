@@ -76,9 +76,21 @@ class ExplorateurRepository {
         return { access, refresh, expiresIn };
     }
 
-    async validateRefreshToken(email, headerBase64) {
-        //TODO:
-    }
+    // Pour valider le refresh token lors du rafraichissement des tokens
+
+    // async validateRefreshToken(email, headerBase64) {
+    //     const explorateur = await this.retrieveByEmail(email);
+    //     if (!explorateur) {
+    //         throw HttpErrors.Unauthorized();
+    //     }
+
+    //     const refreshToken = Buffer.from(headerBase64, 'base64').toString('utf-8');
+    //     if (refreshToken !== explorateur.refreshToken) {
+    //         throw HttpErrors.Unauthorized();
+    //     }
+
+    //     return explorateur;
+    // }
 
     transform(explorateur) {
         explorateur.href = `${process.env.BASE_URL}/explorateurs/${explorateur.uuid}`;

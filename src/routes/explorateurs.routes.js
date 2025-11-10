@@ -1,13 +1,7 @@
 import express from 'express';
 import HttpErrors from 'http-errors';
-
 import validator from './../middlewares/validator.js';
-
-import allyRepository from "../repositories/ally.repository.js"
 import explorateurRepository from "../repositories/explorateur.repository.js"
-
-import { guardAuthorizationJWT } from '../middlewares/authorization.jwt.js';
-
 import explorateurValidators from '../validators/explorateur.validator.js';
 
 const router = express.Router();
@@ -18,13 +12,9 @@ router.get('/:uuid', guardAuthorizationJWT, retrieveOne);
 async function post(req, res, next) {
     try {
         let account = await explorateurRepository.create(req.body);
-        //TODO:JWT TOKENS
         const tokens = explorateurRepository.generateJWT(account.uuid);
         account = account.toObject({ getters: false, virtuals: false });
         account = explorateurRepository.transform(account);
-
-        
-
         res.status(201).json({ account, tokens });
     } catch (err) {
         return next(err);

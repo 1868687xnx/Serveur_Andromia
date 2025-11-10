@@ -13,6 +13,7 @@ router.get('/:uuid', retrieveAlliesByUUID);
 router.get('/:uuid/:uuidAlly', retrieveOneAlly);
 router.patch('/:uuid', guardAuthorizationJWT, addAlly);
 
+
 async function addAlly(req, res, next) {
     try {
         let explorateur = await explorateurRepository.retrieveByUUID(req.auth.uuid);
@@ -28,22 +29,6 @@ async function addAlly(req, res, next) {
         return next(err);
     }
 }
-// Route pour récupérer tous les Allies, mais pour touts les explorateurs, pas seulement un spécifique
-// async function retrieveAll(req, res, next) {
-//     try {
-//         let allies = await allyRepository.retrieveAll();
-//         allies = allies.map(a => {
-//             a = a.toObject({ getters: false, virtuals: false });
-//             a = allyRepository.transform(a, req.options);
-//             return a;
-//         });
-
-//         res.status(200).json(allies);
-//     } catch (err) {
-//         console.log(err);
-//         return next(err);
-//     }
-// }
 
 // Route pour récupérer les Allies d'un explorateur spécifique par son UUID
 async function retrieveAlliesByUUID(req, res, next) {

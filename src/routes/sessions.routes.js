@@ -4,8 +4,6 @@ import HttpErrors from 'http-errors';
 
 import explorateurRepository from "../repositories/explorateur.repository.js"
 
-
-
 const router = express.Router();
 
 router.get('/', login);
