@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
-import { tr } from "@faker-js/faker";
-import { hrtime } from "process";
 
 const allySchema = mongoose.Schema(
   {

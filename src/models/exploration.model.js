@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import crypto from 'crypto';
-import { ElementSchema } from './element.model.js';
-import TABLE_ELEMENT from '../core/constants.js';
 
 const explorationSchema = mongoose.Schema(
     {
@@ -21,7 +18,7 @@ const explorationSchema = mongoose.Schema(
             elements: { type: []}
         },
         ally: { 
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.UUID,
             ref: 'Ally', 
             required: false
         }

@@ -1,10 +1,5 @@
 import express from 'express';
-import HttpErrors from 'http-errors';
-
 import { guardRefreshTokenJWT } from '../middlewares/authorization.jwt.js';
-
-import clientRepository from '../repositories/client.repository.js';
-
 import TokenController from '../controllers/token.controller.js';
 import explorateurRepository from '../repositories/explorateur.repository.js';
 const tokenController = new TokenController()
@@ -23,12 +18,5 @@ async function refresh(req, res, next) {
     }
 }
 
-router.delete('/', (req, res, next) => {
-    try {
-        //TODO:
-    } catch (err) {
-        return next(err);
-    }
-});
 
 export default router;

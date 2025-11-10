@@ -1,6 +1,4 @@
-import { all } from 'axios';
 import { Ally } from '../models/ally.model.js';
-import { de } from '@faker-js/faker';
 
 
 
