@@ -9,8 +9,8 @@ import { guardAuthorizationJWT } from '../middlewares/authorization.jwt.js';
 const router = express.Router();
 
 
-router.get('/:uuid', retrieveAlliesByUUID);
-router.get('/:uuid/:uuidAlly', retrieveOneAlly);
+router.get('/:uuid', guardAuthorizationJWT, retrieveAlliesByUUID);
+router.get('/:uuidAlly', guardAuthorizationJWT, retrieveOneAlly);
 router.patch('/:uuid', guardAuthorizationJWT, addAlly);
 
 

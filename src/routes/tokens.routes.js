@@ -17,13 +17,5 @@ async function refresh(req, res, next) {
     }
 }
 
-// router.delete('/', (req, res, next) => {
-//     try {
-//         //TODO:
-//     } catch (err) {
-//         return next(err);
-//     }
-// })
-// ;
 
 export default router;

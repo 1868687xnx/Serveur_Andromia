@@ -3,7 +3,6 @@ import { Explorateur } from "../models/explorateur.model.js";
 import { Exploration } from "../models/exploration.model.js";
 import allyRepository from "./ally.repository.js";
 
-
 class ExplorationRepository {
   async addForOneUser(body, explorateur_id) {
     const explorateur = await Explorateur.findById(explorateur_id);
@@ -15,9 +14,10 @@ class ExplorationRepository {
 
     const ally = await this.createAlly(body.ally, explorateur_id);
     if (ally) {
-      body.ally = ally._id;
+      body.ally = ally.uuid;
     }
     const exploration = await Exploration.create(body);
+    explorateur.location = exploration.destination;
     this.addToExplorateurInventory(explorateur, exploration.vault);
     await explorateur.save();
     this.transform(exploration);
@@ -53,6 +53,10 @@ class ExplorationRepository {
     } catch (err) {
       throw err;
     }
+  }
+
+  async retrieveByExplorateurUUID(explorateurId){
+    return explorations = await Exploration.find({explorateur: explorateurId});
   }
 }
 
