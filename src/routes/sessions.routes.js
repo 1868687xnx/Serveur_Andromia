@@ -16,7 +16,7 @@ async function login(req, res, next) {
             throw new HttpErrors.Unauthorized('Identifiants invalides');
         }
 
-        const tokens = explorateurRepository.generateJWT(account._id);
+        const tokens = explorateurRepository.generateJWT(account.uuid);
 
         account = account.toObject({ getters: false, virtuals: false });
         account = explorateurRepository.transform(account);

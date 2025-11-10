@@ -4,6 +4,7 @@ import explorationRepository from "../repositories/exploration.repository.js";
 import explorateurRepository from "../repositories/explorateur.repository.js";
 import axios from "axios";
 import { EXPLORATION_URL } from "../core/constants.js";
+import { guardAuthorizationJWT } from "../middlewares/authorization.jwt.js";
 
 const router = express.Router();
 

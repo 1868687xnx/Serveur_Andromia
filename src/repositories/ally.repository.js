@@ -10,9 +10,8 @@ class AllyRepository {
         return Ally.find({idExplorateur: idExplorateur});
     }
 
-    transform(ally, explorateur_id) {
+    transform(ally, explorateur_id = null) {
         ally.explorateur = explorateur_id;
-        ally.href = `${process.env.BASE_URL}/allies/${ally.uuid}`;
         delete ally.books;
         delete ally.expireAt;
         delete ally.crypto;
@@ -20,12 +19,21 @@ class AllyRepository {
     }
 
     async createForOneUser(allyUUID, explorateur_id) {
-        newally = Ally.findOne({uuid: allyUUID});
+        console.log("ALLY UUID REPO :", allyUUID);
+        let newally = await Ally.findOne({uuid: allyUUID});
+        console.log("NEW ALLY :", newally);
         if (!newally) {
             throw new Error("Ally not found");
         }
-        newally = this.transform(newally, explorateur_id);
-        return Ally.create(newally);
+        const updatedAllyData = this.transform(newally.toObject(), explorateur_id);
+        await Ally.findOneAndUpdate(
+            { uuid: allyUUID },
+            updatedAllyData,
+            { new: true }
+        );
+        // Fetch the updated Ally
+        const updatedAlly = await Ally.findOne({uuid: allyUUID});
+        return updatedAlly;
     }
 }
 

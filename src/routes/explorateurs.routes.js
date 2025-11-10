@@ -7,7 +7,7 @@ import explorateurValidators from '../validators/explorateur.validator.js';
 const router = express.Router();
 
 router.post('/', explorateurValidators.postValidator(), validator, post);
-router.get('/:uuid', retrieveOne);
+router.get('/:uuid', guardAuthorizationJWT, retrieveOne);
 
 async function post(req, res, next) {
     try {
