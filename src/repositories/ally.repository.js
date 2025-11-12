@@ -7,7 +7,10 @@ class AllyRepository {
     }
 
     retrieveForOneUser(idExplorateur) {
-        return Ally.find({idExplorateur: idExplorateur});
+        const allies = Ally.find({explorateur: idExplorateur});
+
+        console.log(allies);
+        return allies;
     }
 
     transform(ally, explorateur_id = null) {

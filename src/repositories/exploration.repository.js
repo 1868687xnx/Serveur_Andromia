@@ -14,9 +14,11 @@ class ExplorationRepository {
 
     const ally = await this.createAlly(body.ally, explorateur_id);
     if (ally) {
-      body.ally = ally.uuid;
+      body.ally = ally._id;
     }
+
     const exploration = await Exploration.create(body);
+    //exploration.allyHref = ally.href;
     explorateur.location = exploration.destination;
     this.addToExplorateurInventory(explorateur, exploration.vault);
     await explorateur.save();
@@ -55,9 +57,9 @@ class ExplorationRepository {
     }
   }
 
-  async retrieveByExplorateurUUID(explorateurUUId){
-    const explorateur = await Explorateur.findOne({uuid: explorateurUUId});
-    return Exploration.find({explorateur: explorateur._id});
+  async retrieveByExplorateurUUID(explorateurUUId) {
+    const explorateur = await Explorateur.findOne({ uuid: explorateurUUId });
+    return Exploration.find({ explorateur: explorateur._id });
   }
 }
 

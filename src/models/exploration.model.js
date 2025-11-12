@@ -18,7 +18,7 @@ const explorationSchema = mongoose.Schema(
             elements: { type: []}
         },
         ally: { 
-            type: mongoose.Schema.Types.UUID,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Ally', 
             required: false
         },
