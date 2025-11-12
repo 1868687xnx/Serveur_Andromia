@@ -21,7 +21,8 @@ const explorationSchema = mongoose.Schema(
             type: mongoose.Schema.Types.UUID,
             ref: 'Ally', 
             required: false
-        }
+        },
+        uuid: { type: String, required: true, unique: true, default: () => crypto.randomUUID() }
     },
     {
         collection: 'explorations',
