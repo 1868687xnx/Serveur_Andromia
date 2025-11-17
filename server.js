@@ -1,7 +1,7 @@
 import { env } from 'node:process';
 import chalk from 'chalk';
 
-import app from './src/app.js';
+import app from './src/index.js';
 
 app.listen(env.PORT, (err) => {
 
